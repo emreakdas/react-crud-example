@@ -5,7 +5,6 @@ const initialState = {
     filters: {},
     perPageLimit: 10,
     currentPage: 1,
-    reload: false,
     data: []
 };
 
@@ -42,13 +41,10 @@ export const productsSlice = createSlice({
     },
     prevPage: (state) => {
         state.currentPage--;
-    },
-    reload: (state) => {
-      state.reload = !state.reload;
     }
   }
 })
 
-export const { reload, setProducts, setCurrentPage, setPerPageLimit, setSearchString, setPropertyFilters, deletePropertyFilters, clearFilters, nextPage, prevPage } = productsSlice.actions
+export const { setProducts, setCurrentPage, setPerPageLimit, setSearchString, setPropertyFilters, deletePropertyFilters, clearFilters, nextPage, prevPage } = productsSlice.actions
 
 export default productsSlice.reducer

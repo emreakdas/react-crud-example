@@ -17,7 +17,7 @@ const CreateProductSchema = Yup.object().shape({
   images: Yup.string().url("Enter valid photo url.").required("Required"),
 });
 
-function ProductUpdate({ productId }) {
+function ProductUpdateForm({ productId }) {
   const [product, setProduct] = useState(null);
   const dispatch = useDispatch();
 
@@ -41,6 +41,7 @@ function ProductUpdate({ productId }) {
   }, []);
 
   function handleSubmit(values, { setSubmitting }) {
+    toast.info("Product is updating...");
     const url = getApiURL(`products/${productId}`);
     const body = JSON.stringify({ ...values, images: [values.images] });
     actionData(
@@ -156,7 +157,7 @@ function ProductUpdate({ productId }) {
               type="submit"
               className="bg-blue-600 h-[40px] px-3 text-md text-white rounded hover:bg-blue-700 disabled:opacity-50"
             >
-              {isSubmitting ? "Loading..." : "Update"}
+              {isSubmitting ? "Updating..." : "Update"}
             </button>
           </div>
         </form>
@@ -165,4 +166,4 @@ function ProductUpdate({ productId }) {
   );
 }
 
-export default ProductUpdate;
+export default ProductUpdateForm;

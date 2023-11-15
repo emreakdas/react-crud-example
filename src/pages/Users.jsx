@@ -14,7 +14,7 @@ function Users() {
     fetchData(
       url,
       (json) => setUsers(json),
-      () => toast.error("Users could not be loaded. Please try again later.")
+      () => toast.error("Users could not be loaded. Please try again later."),
     );
   }, []);
 

@@ -7,7 +7,7 @@ function Row({ children }) {
       initial={{ opacity: 0, transform: "translateY(-30px)" }}
       exit={{ opacity: 0 }}
       animate={{ opacity: 1, transform: "translateY(0)" }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.4 }}
     >
       {children}
     </motion.tr>

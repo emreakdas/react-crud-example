@@ -17,7 +17,7 @@ const CreateProductSchema = Yup.object().shape({
   categoryId: Yup.string().required('Required'),
 });
 
-function ProductCreate() {
+function ProductCreateForm() {
   const [categories, setCategories] = useState(null);
   const dispatch = useDispatch();
 
@@ -34,6 +34,7 @@ function ProductCreate() {
   }, []);
 
   function handleSubmit(values, { setSubmitting }) {
+    toast.info("Product is adding...");
     const url = getApiURL("products");
     const body = JSON.stringify({...values, images:[values.images]});
     actionData(
@@ -171,7 +172,7 @@ function ProductCreate() {
               type="submit"
               className="bg-blue-600 h-[40px] px-3 text-md text-white rounded hover:bg-blue-700 disabled:opacity-50"
             >
-              {isSubmitting ? "Loading..." : "Create"}
+              {isSubmitting ? "Adding..." : "Create"}
             </button>
           </div>
         </form>
@@ -180,4 +181,4 @@ function ProductCreate() {
   );
 }
 
-export default ProductCreate;
+export default ProductCreateForm;

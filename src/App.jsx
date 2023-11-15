@@ -1,4 +1,4 @@
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 import Modal from "@/components/Modals/Index";
 import Products from "@/pages/Products";
 import Users from "@/pages/Users";
