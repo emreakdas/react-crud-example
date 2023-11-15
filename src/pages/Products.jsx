@@ -21,11 +21,20 @@ import ProductCreateForm from "@/components/Product/Create";
 import ProductUpdateForm from "@/components/Product/Update";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { FilterIcon, PencilIcon, PlusIcon, TrashIcon } from "@/components/Icons";
+import {
+  FilterIcon,
+  PencilIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@/components/Icons";
+import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import EditButton from "@/components/Buttons/EditButton";
+import DangerButton from "@/components/Buttons/DangerButton";
 
 function Products() {
   const [reload, setReload] = useState(false);
-  const { data, perPageLimit, currentPage, searchString, filters } = useSelector((state) => state.products);
+  const { data, perPageLimit, currentPage, searchString, filters } =
+    useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,8 +50,7 @@ function Products() {
       (json) => {
         dispatch(setProducts(json));
       },
-      () =>
-        toast.error("Products could not be loaded. Please try again later."),
+      () => toast.error("Products could not be loaded. Please try again later.")
     );
   }, [currentPage, perPageLimit, searchString, filters, reload]);
 
@@ -73,20 +81,16 @@ function Products() {
               handleChange={(e) => dispatch(setSearchString(e.target.value))}
             />
             <div className="flex items-center space-x-2">
-              <button
-                className="bg-blue-600 h-[40px] px-3 flex items-center space-x-1 text-md text-white rounded hover:bg-blue-700"
+              <PrimaryButton
                 onClick={() => dispatch(openModal(<ProductCreateForm />))}
               >
                 <PlusIcon />
                 <span>Create Product</span>
-              </button>
-              <button
-                className="bg-blue-600 h-[40px] px-3 flex items-center space-x-1 text-md text-white rounded hover:bg-blue-700"
-                onClick={() => dispatch(openModal(<Filters />))}
-              >
+              </PrimaryButton>
+              <PrimaryButton onClick={() => dispatch(openModal(<Filters />))}>
                 <FilterIcon />
                 <span>Filter</span>
-              </button>
+              </PrimaryButton>
             </div>
           </div>
           <div className="overflow-hidden">
@@ -115,24 +119,12 @@ function Products() {
                     <Table.Cell>{product.category.name}</Table.Cell>
                     <Table.Cell>
                       <div className="flex items-center space-x-2">
-                        <button
-                          className="bg-green-600 h-[32px] w-[32px] grid place-items-center space-x-1 text-md text-white rounded hover:bg-green-700"
-                          onClick={() =>
-                            dispatch(
-                              openModal(
-                                <ProductUpdateForm productId={product.id} />
-                              )
-                            )
-                          }
-                        >
+                        <EditButton onClick={() =>dispatch(openModal(<ProductUpdateForm productId={product.id} />))}>
                           <PencilIcon />
-                        </button>
-                        <button
-                          className="bg-red-600 h-[32px] w-[32px] grid place-items-center space-x-1 text-md text-white rounded hover:bg-red-700"
-                          onClick={() => handleDeleteProduct(product.id)}
-                        >
+                        </EditButton>
+                        <DangerButton onClick={() => handleDeleteProduct(product.id)}>
                           <TrashIcon />
-                        </button>
+                        </DangerButton>
                       </div>
                     </Table.Cell>
                   </Table.Row>

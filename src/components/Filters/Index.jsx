@@ -12,6 +12,8 @@ import fetchData from "@/helpers/fetchData";
 import { toast } from "sonner";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import TextButton from "@/components/Buttons/TextButton";
 
 const FilterSchema = Yup.object().shape({
   price_min: Yup.number()
@@ -154,19 +156,13 @@ function Filters() {
             </small>
           </div>
           <div className="border-t pt-3 flex items-center justify-end space-x-2">
-            <button
+            <TextButton
               type="reset"
-              className="text-gray-800"
               onClick={handleClearFilters}
             >
               Clear
-            </button>
-            <button
-              type="submit"
-              className="bg-blue-600 h-[40px] px-3 text-md text-white rounded hover:bg-blue-700"
-            >
-              Filter
-            </button>
+            </TextButton>
+            <PrimaryButton type="submit">Filter</PrimaryButton>
           </div>
         </form>
       )}

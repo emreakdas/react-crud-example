@@ -7,8 +7,9 @@ import { toast } from "sonner";
 import actionData from "@/helpers/actionData";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import PrimaryButton from "@/components/Buttons/PrimaryButton";
 
-const CreateProductSchema = Yup.object().shape({
+const UpdateProductSchema = Yup.object().shape({
   title: Yup.string().min(3, "Too Short!").required("Required"),
   description: Yup.string().min(3, "Too Short!").required("Required"),
   price: Yup.number()
@@ -30,8 +31,8 @@ function ProductUpdateForm({ productId }) {
           title: json.title,
           price: json.price,
           description: json.description,
-          images: json.images[0]
-        })
+          images: json.images[0],
+        });
       },
       () => {
         toast.error("Product Please try again later.");
@@ -69,8 +70,8 @@ function ProductUpdateForm({ productId }) {
 
   return (
     <Formik
-      initialValues={{ ...product}}
-      validationSchema={CreateProductSchema}
+      initialValues={{ ...product }}
+      validationSchema={UpdateProductSchema}
       onSubmit={handleSubmit}
     >
       {({
@@ -152,13 +153,9 @@ function ProductUpdateForm({ productId }) {
             </small>
           </div>
           <div className="border-t pt-3 flex items-center justify-end space-x-2">
-            <button
-              disabled={isSubmitting}
-              type="submit"
-              className="bg-blue-600 h-[40px] px-3 text-md text-white rounded hover:bg-blue-700 disabled:opacity-50"
-            >
+            <PrimaryButton disabled={isSubmitting} type="submit">
               {isSubmitting ? "Updating..." : "Update"}
-            </button>
+            </PrimaryButton>
           </div>
         </form>
       )}

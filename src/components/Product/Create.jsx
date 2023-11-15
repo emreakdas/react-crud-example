@@ -6,15 +6,17 @@ import fetchData from "@/helpers/fetchData";
 import { toast } from "sonner";
 import actionData from "@/helpers/actionData";
 import { Formik } from "formik";
-import * as Yup from 'yup';
-
+import * as Yup from "yup";
+import PrimaryButton from "@/components/Buttons/PrimaryButton";
 
 const CreateProductSchema = Yup.object().shape({
-  title: Yup.string().min(3, 'Too Short!').required('Required'),
-  description: Yup.string().min(3, 'Too Short!').required('Required'),
-  price: Yup.number().min(0, 'Price cannot be less than 0').required('Required'),
-  images: Yup.string().url("Enter valid photo url.").required('Required'),
-  categoryId: Yup.string().required('Required'),
+  title: Yup.string().min(3, "Too Short!").required("Required"),
+  description: Yup.string().min(3, "Too Short!").required("Required"),
+  price: Yup.number()
+    .min(0, "Price cannot be less than 0")
+    .required("Required"),
+  images: Yup.string().url("Enter valid photo url.").required("Required"),
+  categoryId: Yup.string().required("Required"),
 });
 
 function ProductCreateForm() {
@@ -36,7 +38,7 @@ function ProductCreateForm() {
   function handleSubmit(values, { setSubmitting }) {
     toast.info("Product is adding...");
     const url = getApiURL("products");
-    const body = JSON.stringify({...values, images:[values.images]});
+    const body = JSON.stringify({ ...values, images: [values.images] });
     actionData(
       url,
       "POST",
@@ -96,7 +98,9 @@ function ProductCreateForm() {
               placeholder="Title"
               value={values.title}
             />
-            <small className="text-red-500 py-2">{errors.title && touched.title && errors.title}</small>
+            <small className="text-red-500 py-2">
+              {errors.title && touched.title && errors.title}
+            </small>
           </div>
           <div className="mb-4">
             <label className="block mb-2 text-sm font-medium text-gray-900">
@@ -111,7 +115,9 @@ function ProductCreateForm() {
               className="bg-text-sm rounded-lg block w-full p-3 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
               placeholder="0"
             />
-            <small className="text-red-500 py-2">{errors.price && touched.price && errors.price}</small>
+            <small className="text-red-500 py-2">
+              {errors.price && touched.price && errors.price}
+            </small>
           </div>
           <div className="mb-4">
             <label className="block mb-2 text-sm font-medium text-gray-900">
@@ -164,16 +170,14 @@ function ProductCreateForm() {
               type="text"
               className="bg-text-sm rounded-lg block w-full p-3 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
             />
-            <small className="text-red-500 py-2">{errors.images && touched.images && errors.images}</small>
+            <small className="text-red-500 py-2">
+              {errors.images && touched.images && errors.images}
+            </small>
           </div>
           <div className="border-t pt-3 flex items-center justify-end space-x-2">
-            <button
-              disabled={isSubmitting}
-              type="submit"
-              className="bg-blue-600 h-[40px] px-3 text-md text-white rounded hover:bg-blue-700 disabled:opacity-50"
-            >
+            <PrimaryButton disabled={isSubmitting} type="submit">
               {isSubmitting ? "Adding..." : "Create"}
-            </button>
+            </PrimaryButton>
           </div>
         </form>
       )}
