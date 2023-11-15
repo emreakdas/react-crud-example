@@ -3,6 +3,7 @@ import getApiURL from "@/helpers/getApiURL";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setPropertyFilters,
+  setCurrentPage,
   deletePropertyFilters,
   clearFilters,
 } from "@/store/slice/productsSlice";
@@ -39,6 +40,7 @@ function Filters() {
         }
       }
     }
+    dispatch(setCurrentPage(1));
     dispatch(closeModal());
   }
 

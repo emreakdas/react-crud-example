@@ -31,7 +31,7 @@ function Products() {
     };
 
     const url = getApiURL("products", queryString);
-
+    
     fetchData(
       url,
       (json) => {

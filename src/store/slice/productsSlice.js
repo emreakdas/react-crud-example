@@ -15,6 +15,9 @@ export const productsSlice = createSlice({
     setProducts: (state, action) => {
       state.data = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
     setPerPageLimit: (state, action) => {
       state.perPageLimit = action.payload;
       state.currentPage = 1;
@@ -31,6 +34,7 @@ export const productsSlice = createSlice({
     },
     clearFilters: (state, action) => {
       state.filters = {};
+      state.currentPage = 1;
     },
     nextPage: (state) => {
         state.currentPage++;
@@ -41,6 +45,6 @@ export const productsSlice = createSlice({
   }
 })
 
-export const { setProducts, setPerPageLimit, setSearchString, setPropertyFilters, deletePropertyFilters, clearFilters, nextPage, prevPage } = productsSlice.actions
+export const { setProducts, setCurrentPage, setPerPageLimit, setSearchString, setPropertyFilters, deletePropertyFilters, clearFilters, nextPage, prevPage } = productsSlice.actions
 
 export default productsSlice.reducer
