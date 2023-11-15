@@ -1,5 +1,5 @@
 import { Toaster } from "sonner";
-import Modal from "@/components/Modals/Index";
+import Modal from "@/components/Modal";
 import Products from "@/pages/Products";
 import Users from "@/pages/Users";
 import NotFound from "@/pages/NotFound";

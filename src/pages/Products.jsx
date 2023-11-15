@@ -15,7 +15,7 @@ import Pagination from "@/components/Pagination";
 import getApiURL from "@/helpers/getApiURL";
 import actionData from "@/helpers/actionData";
 import fetchData from "@/helpers/fetchData";
-import Filters from "@/components/Filters/Index";
+import Filters from "@/components/Filters";
 import { toast } from "sonner";
 import ProductCreateForm from "@/components/Product/Create";
 import ProductUpdateForm from "@/components/Product/Update";
