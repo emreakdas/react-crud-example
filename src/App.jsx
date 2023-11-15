@@ -6,6 +6,7 @@ import NotFound from "@/pages/NotFound";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const { openedModal } = useSelector((state) => state.modals);
@@ -19,7 +20,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {openedModal && <Modal />}
+        <AnimatePresence>{openedModal && <Modal />}</AnimatePresence>
         <Toaster position="bottom-center" richColors />
       </div>
     </>
