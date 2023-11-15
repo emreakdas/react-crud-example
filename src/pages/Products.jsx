@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setProducts,
+  reload,
   setSearchString,
   setPerPageLimit,
   nextPage,
@@ -19,10 +20,17 @@ import Filters from "@/components/Filters/Index";
 import { toast } from "sonner";
 import ProductCreate from "@/components/Product/Create";
 import ProductUpdate from "@/components/Product/Update";
+import { AnimatePresence } from "framer-motion";
 
 function Products() {
-  const { data, perPageLimit, currentPage, searchString, filters } =
-    useSelector((state) => state.products);
+  const {
+    data,
+    perPageLimit,
+    currentPage,
+    searchString,
+    filters,
+    reload: reloadHandle,
+  } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +50,7 @@ function Products() {
       },
       () => toast.error("Products could not be loaded. Please try again later.")
     );
-  }, [currentPage, perPageLimit, searchString, filters]);
+  }, [currentPage, perPageLimit, searchString, filters, reloadHandle]);
 
   function handleDeleteProduct(id) {
     const url = getApiURL(`products/${id}`);
@@ -52,6 +60,7 @@ function Products() {
       undefined,
       () => {
         toast.success("Product deleted.");
+        dispatch(reload());
       },
       () => {
         toast.error("The product could not be deleted.");
@@ -117,74 +126,78 @@ function Products() {
             <Table
               thead={["#", "Image", "Title", "Price", "Category", "Actions"]}
             >
-              {data.map((product) => (
-                <Table.Row key={product.id}>
-                  <Table.Cell>{product.id}</Table.Cell>
-                  <Table.Cell>
-                    <div className="w-[60px] h-[60px] relative overflow-hidden rounded">
-                      <img
-                        src={product.images[0]}
-                        className="absolute inset-0 max-w-full max-h-full"
-                      />
-                    </div>
-                  </Table.Cell>
-                  <Table.Cell>{product.title}</Table.Cell>
-                  <Table.Cell>
-                    {new Intl.NumberFormat("en-EN", {
-                      style: "currency",
-                      currency: "EUR",
-                    }).format(product.price.toFixed(2))}
-                  </Table.Cell>
-                  <Table.Cell>{product.category.name}</Table.Cell>
-                  <Table.Cell>
-                    <div className="flex items-center space-x-2">
-                      <button
-                        className="bg-green-600 h-[32px] w-[32px] grid place-items-center space-x-1 text-md text-white rounded hover:bg-green-700"
-                        onClick={() =>
-                          dispatch(
-                            openModal(<ProductUpdate productId={product.id} />)
-                          )
-                        }
-                      >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
+              <AnimatePresence>
+                {data.map((product) => (
+                  <Table.Row key={product.id}>
+                    <Table.Cell>{product.id}</Table.Cell>
+                    <Table.Cell>
+                      <div className="w-[60px] h-[60px] relative overflow-hidden rounded-md border-2 border-gray-700 bg-white">
+                        <img
+                          src={product.images[0]}
+                          className="absolute inset-0 max-w-full max-h-full m-auto"
+                        />
+                      </div>
+                    </Table.Cell>
+                    <Table.Cell>{product.title}</Table.Cell>
+                    <Table.Cell>
+                      {new Intl.NumberFormat("en-EN", {
+                        style: "currency",
+                        currency: "EUR",
+                      }).format(product.price.toFixed(2))}
+                    </Table.Cell>
+                    <Table.Cell>{product.category.name}</Table.Cell>
+                    <Table.Cell>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          className="bg-green-600 h-[32px] w-[32px] grid place-items-center space-x-1 text-md text-white rounded hover:bg-green-700"
+                          onClick={() =>
+                            dispatch(
+                              openModal(
+                                <ProductUpdate productId={product.id} />
+                              )
+                            )
+                          }
                         >
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M21.1213 2.70705C19.9497 1.53548 18.0503 1.53547 16.8787 2.70705L15.1989 4.38685L7.29289 12.2928C7.16473 12.421 7.07382 12.5816 7.02986 12.7574L6.02986 16.7574C5.94466 17.0982 6.04451 17.4587 6.29289 17.707C6.54127 17.9554 6.90176 18.0553 7.24254 17.9701L11.2425 16.9701C11.4184 16.9261 11.5789 16.8352 11.7071 16.707L19.5556 8.85857L21.2929 7.12126C22.4645 5.94969 22.4645 4.05019 21.2929 2.87862L21.1213 2.70705ZM18.2929 4.12126C18.6834 3.73074 19.3166 3.73074 19.7071 4.12126L19.8787 4.29283C20.2692 4.68336 20.2692 5.31653 19.8787 5.70705L18.8622 6.72357L17.3068 5.10738L18.2929 4.12126ZM15.8923 6.52185L17.4477 8.13804L10.4888 15.097L8.37437 15.6256L8.90296 13.5112L15.8923 6.52185ZM4 7.99994C4 7.44766 4.44772 6.99994 5 6.99994H10C10.5523 6.99994 11 6.55223 11 5.99994C11 5.44766 10.5523 4.99994 10 4.99994H5C3.34315 4.99994 2 6.34309 2 7.99994V18.9999C2 20.6568 3.34315 21.9999 5 21.9999H16C17.6569 21.9999 19 20.6568 19 18.9999V13.9999C19 13.4477 18.5523 12.9999 18 12.9999C17.4477 12.9999 17 13.4477 17 13.9999V18.9999C17 19.5522 16.5523 19.9999 16 19.9999H5C4.44772 19.9999 4 19.5522 4 18.9999V7.99994Z"
-                            fill="#fff"
-                          />
-                        </svg>
-                      </button>
-                      <button
-                        className="bg-red-600 h-[32px] w-[32px] grid place-items-center space-x-1 text-md text-white rounded hover:bg-red-700"
-                        onClick={() => handleDeleteProduct(product.id)}
-                      >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M21.1213 2.70705C19.9497 1.53548 18.0503 1.53547 16.8787 2.70705L15.1989 4.38685L7.29289 12.2928C7.16473 12.421 7.07382 12.5816 7.02986 12.7574L6.02986 16.7574C5.94466 17.0982 6.04451 17.4587 6.29289 17.707C6.54127 17.9554 6.90176 18.0553 7.24254 17.9701L11.2425 16.9701C11.4184 16.9261 11.5789 16.8352 11.7071 16.707L19.5556 8.85857L21.2929 7.12126C22.4645 5.94969 22.4645 4.05019 21.2929 2.87862L21.1213 2.70705ZM18.2929 4.12126C18.6834 3.73074 19.3166 3.73074 19.7071 4.12126L19.8787 4.29283C20.2692 4.68336 20.2692 5.31653 19.8787 5.70705L18.8622 6.72357L17.3068 5.10738L18.2929 4.12126ZM15.8923 6.52185L17.4477 8.13804L10.4888 15.097L8.37437 15.6256L8.90296 13.5112L15.8923 6.52185ZM4 7.99994C4 7.44766 4.44772 6.99994 5 6.99994H10C10.5523 6.99994 11 6.55223 11 5.99994C11 5.44766 10.5523 4.99994 10 4.99994H5C3.34315 4.99994 2 6.34309 2 7.99994V18.9999C2 20.6568 3.34315 21.9999 5 21.9999H16C17.6569 21.9999 19 20.6568 19 18.9999V13.9999C19 13.4477 18.5523 12.9999 18 12.9999C17.4477 12.9999 17 13.4477 17 13.9999V18.9999C17 19.5522 16.5523 19.9999 16 19.9999H5C4.44772 19.9999 4 19.5522 4 18.9999V7.99994Z"
+                              fill="#fff"
+                            />
+                          </svg>
+                        </button>
+                        <button
+                          className="bg-red-600 h-[32px] w-[32px] grid place-items-center space-x-1 text-md text-white rounded hover:bg-red-700"
+                          onClick={() => handleDeleteProduct(product.id)}
                         >
-                          <path
-                            d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"
-                            stroke="#fff"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"
+                              stroke="#fff"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </AnimatePresence>
             </Table>
           </div>
           <div className="py-1 px-4 flex justify-between">
