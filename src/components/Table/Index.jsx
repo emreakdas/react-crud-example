@@ -5,7 +5,7 @@ import Cell from "./Cell";
 
 function Table({ children, thead }) {
   return (
-    <div className="overflow-x-auto overflow-y-visible">
+    <div className="overflow-x-auto p-2">
       <table className="min-w-full divide-y divide-gray-700">
         <Thead theads={thead} />
         <Tbody>{children}</Tbody>
