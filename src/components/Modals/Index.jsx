@@ -30,7 +30,7 @@ function Modal() {
         </div>
         <div className="p-3">{modalContent}</div>
       </div>
-      <div className="fixed inset-0 bg-black opacity-60 z-10"></div>
+      <div className="fixed inset-0 bg-black opacity-60 z-10" onClick={() => dispatch(closeModal())}></div>
     </>
   );
 }
