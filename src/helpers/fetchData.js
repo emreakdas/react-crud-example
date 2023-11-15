@@ -8,5 +8,5 @@ export default function fetchData(url, success, error) {
       return Promise.reject();
     })
     .then(json => success(json))
-    .catch(err => error());
+    .catch(() => error());
 }

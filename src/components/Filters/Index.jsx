@@ -55,6 +55,7 @@ function Filters() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1 className="pb-2 mb-2 border-b text-xl">Filter</h1>
       <div className="mb-4">
         <label className="block mb-2 text-sm font-medium text-gray-900">
           Category
