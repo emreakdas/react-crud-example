@@ -6,17 +6,9 @@ import fetchData from "@/helpers/fetchData";
 import { toast } from "sonner";
 import actionData from "@/helpers/actionData";
 import { Formik } from "formik";
-import * as Yup from "yup";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
-
-const UpdateProductSchema = Yup.object().shape({
-  title: Yup.string().min(3, "Too Short!").required("Required"),
-  description: Yup.string().min(3, "Too Short!").required("Required"),
-  price: Yup.number()
-    .min(0, "Price cannot be less than 0")
-    .required("Required"),
-  images: Yup.string().url("Enter valid photo url.").required("Required"),
-});
+import Input from "@/components/Input";
+import { UpdateProductSchema } from "@/validation";
 
 function ProductUpdateForm({ productId }) {
   const [product, setProduct] = useState(null);
@@ -89,12 +81,11 @@ function ProductUpdateForm({ productId }) {
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Title
             </label>
-            <input
+            <Input
               onChange={handleChange}
               onBlur={handleBlur}
               name="title"
               type="text"
-              className="bg-text-sm rounded-lg block w-full p-3 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
               placeholder="Title"
               value={values.title}
             />
@@ -106,13 +97,12 @@ function ProductUpdateForm({ productId }) {
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Price
             </label>
-            <input
+            <Input
               onChange={handleChange}
               onBlur={handleBlur}
               name="price"
               type="number"
               value={values.price}
-              className="bg-text-sm rounded-lg block w-full p-3 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
               placeholder="0"
             />
             <small className="text-red-500 py-2">
@@ -123,13 +113,12 @@ function ProductUpdateForm({ productId }) {
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Description
             </label>
-            <input
+            <Input
               onChange={handleChange}
               onBlur={handleBlur}
               name="description"
               value={values.description}
               type="text"
-              className="bg-text-sm rounded-lg block w-full p-3 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
               placeholder="Description"
             />
             <small className="text-red-500 py-2">
@@ -140,13 +129,12 @@ function ProductUpdateForm({ productId }) {
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Photo URL
             </label>
-            <input
+            <Input
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.images}
               name="images"
               type="text"
-              className="bg-text-sm rounded-lg block w-full p-3 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
             />
             <small className="text-red-500 py-2">
               {errors.images && touched.images && errors.images}

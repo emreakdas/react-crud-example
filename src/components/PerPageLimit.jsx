@@ -3,7 +3,7 @@ function PerPageLimit({ value, handleChange }) {
     <div className="flex items-center space-x-2">
       <label className="text-white text-sm">Per page limit</label>
       <select
-        className="text-sm rounded-lg block bg-transparent text-white outline-none"
+        className="text-sm rounded-lg block bg-gray-800 text-white outline-none"
         onChange={handleChange}
         value={value}
       >

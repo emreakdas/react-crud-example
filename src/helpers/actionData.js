@@ -1,10 +1,17 @@
-export default function actionData(url, method, body, success, error, finalyCallback = (() => {})) {
+export default function actionData(
+  url,
+  method,
+  body,
+  success,
+  error,
+  finalyCallback = () => {}
+) {
   fetch(url, {
     method,
     body,
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   })
     .then((response) => {
       if (response.ok) {
