@@ -19,7 +19,7 @@ function Users() {
   }, []);
 
   return (
-    <div className="-m-1.5 overflow-x-auto">
+    <div className="overflow-x-auto">
       <div className="p-1.5 min-w-full inline-block align-middle">
         <div className="border bg-gray-800 rounded-lg divide-y divide-gray-700 border-gray-700">
           <div className="overflow-hidden">
