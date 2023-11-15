@@ -16,7 +16,7 @@ function Modal() {
 
   return (
     <>
-      <div className="fixed top-0 right-0 h-full w-[400px] bg-white shadow z-20">
+      <div className="fixed top-0 right-0 h-full w-[300px] bg-white shadow z-20">
         <div className="p-1 text-right flex justify-end border-b">
           <button
             onClick={() => dispatch(closeModal())}
