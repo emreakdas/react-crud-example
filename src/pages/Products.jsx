@@ -89,9 +89,9 @@ function Products() {
                   </Table.Cell>
                   <Table.Cell>{product.title}</Table.Cell>
                   <Table.Cell>
-                    {new Intl.NumberFormat("tr-TR", {
+                    {new Intl.NumberFormat("en-EN", {
                       style: "currency",
-                      currency: "TRY",
+                      currency: "EUR",
                     }).format(product.price.toFixed(2))}
                   </Table.Cell>
                   <Table.Cell>{product.category.name}</Table.Cell>
