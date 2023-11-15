@@ -1,9 +1,9 @@
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { closeModal } from "@/store/slice/modalsSlice";
-import { useEffect } from "react";
 import DangerButton from "@/components/Buttons/DangerButton";
 import { CloseIcon } from "@/components/Icons";
-import { motion } from "framer-motion";
 
 function Modal() {
   const { modalContent } = useSelector((state) => state.modals);
@@ -15,7 +15,7 @@ function Modal() {
     return () => {
       setTimeout(() => {
         document.body.style.overflow = "auto";
-      }, 200)
+      }, 200);
     };
   }, []);
 
@@ -23,7 +23,7 @@ function Modal() {
     <div>
       <motion.div
         animate={{ right: 0 }}
-        exit={{ right: "-300px"}}
+        exit={{ right: "-300px" }}
         transition={{ duration: 0.2 }}
         className="fixed top-0 right-[-300px] h-full w-[300px] bg-white shadow z-20"
       >

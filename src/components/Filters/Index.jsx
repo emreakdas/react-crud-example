@@ -1,21 +1,21 @@
+import { toast } from "sonner";
+import { Formik } from "formik";
+import { FilterSchema } from "@/validation";
 import { useState, useEffect } from "react";
 import getApiURL from "@/helpers/getApiURL";
-import { useDispatch, useSelector } from "react-redux";
+import fetchData from "@/helpers/fetchData";
 import {
   setPropertyFilters,
   setCurrentPage,
   deletePropertyFilters,
   clearFilters,
 } from "@/store/slice/productsSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "@/store/slice/modalsSlice";
-import fetchData from "@/helpers/fetchData";
-import { toast } from "sonner";
-import { Formik } from "formik";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import TextButton from "@/components/Buttons/TextButton";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
-import { FilterSchema } from "@/validation";
 
 function Filters() {
   const [categories, setCategories] = useState(null);

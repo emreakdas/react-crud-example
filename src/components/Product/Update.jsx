@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
+import { Formik } from "formik";
+import { toast } from "sonner";
 import getApiURL from "@/helpers/getApiURL";
 import { useDispatch } from "react-redux";
 import { closeModal } from "@/store/slice/modalsSlice";
+import { UpdateProductSchema } from "@/validation";
 import fetchData from "@/helpers/fetchData";
-import { toast } from "sonner";
 import actionData from "@/helpers/actionData";
-import { Formik } from "formik";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import Input from "@/components/Input";
-import { UpdateProductSchema } from "@/validation";
 
 function ProductUpdateForm({ productId }) {
   const [product, setProduct] = useState(null);

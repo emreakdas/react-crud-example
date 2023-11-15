@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
+import { Formik } from "formik";
+import { CreateProductSchema } from "@/validation";
 import getApiURL from "@/helpers/getApiURL";
+import fetchData from "@/helpers/fetchData";
+import actionData from "@/helpers/actionData";
 import { useDispatch } from "react-redux";
 import { closeModal } from "@/store/slice/modalsSlice";
-import fetchData from "@/helpers/fetchData";
-import { toast } from "sonner";
-import actionData from "@/helpers/actionData";
-import { Formik } from "formik";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
-import { CreateProductSchema } from "@/validation";
 
 function ProductCreateForm() {
   const [categories, setCategories] = useState(null);
