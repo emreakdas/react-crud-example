@@ -39,3 +39,6 @@ Canlı URL: https://verdexport-case.vercel.app/
 <img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/aab78441-f2fe-43e9-8edc-769323751372">
 <img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/88d80bfb-be6e-4f39-a1c3-18e8342d708d">
 <img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/f792c2bb-5141-4764-85aa-4f0949ff130c">
+
+## Stack
+React.JS, TailwindCSS, Redux Toolkit, Yup (Validation), Sonner (Tooltip Package), React Router Dom, Formik, Framer Motion
