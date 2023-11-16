@@ -29,7 +29,7 @@ Canlı URL: https://verdexport-case.vercel.app/
   pnpm install
 ```
 
-#### Projeyi kaldırın
+#### Projeyi ayağa kaldırın
 
 ```bash 
   pnpm run dev
