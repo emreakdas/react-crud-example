@@ -35,9 +35,8 @@ Canlı URL: https://verdexport-case.vercel.app/
   pnpm run dev
 ```
 ## Ekran Görüntüleri
-<img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/9f4c8739-96d7-4b19-9b38-8230680d7763">
-<img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/59a24f96-d204-446e-a774-794ffaf7c46d">
-<img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/e5976a99-2a22-47c8-b398-695108214ede">
-<img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/aab78441-f2fe-43e9-8edc-769323751372">
-<img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/88d80bfb-be6e-4f39-a1c3-18e8342d708d">
-<img width="33%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/f792c2bb-5141-4764-85aa-4f0949ff130c">
+<img width="40%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/25de097f-afe2-43e7-b025-81f41d5ef37c">
+<img width="40%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/076fd203-3d37-41f0-9925-eb1ad21e6755">
+<img width="40%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/d4ce9749-ddb3-40d5-9427-65ad361c86e1">
+<img width="40%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/aefa9d8d-c8b5-48eb-8178-bf353df1a629">
+<img width="40%" alt="image" src="https://github.com/emreakdas/verdexport-case/assets/29312582/fe30f8fe-e5b9-4c51-b842-6b18264e49c4">
