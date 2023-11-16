@@ -10,7 +10,7 @@ import actionData from "@/helpers/actionData";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import Input from "@/components/Input";
 
-function ProductUpdateForm({ productId }) {
+function ProductUpdateForm({ productId, setUpdateProductId }) {
   const [product, setProduct] = useState(null);
   const dispatch = useDispatch();
 
@@ -43,6 +43,7 @@ function ProductUpdateForm({ productId }) {
       body,
       () => {
         toast.success("Product Update");
+        setUpdateProductId({id: productId});
         dispatch(closeModal());
       },
       () => {

@@ -33,10 +33,10 @@ import DangerButton from "@/components/Buttons/DangerButton";
 
 function Products() {
   const [reload, setReload] = useState(false);
+  const [updateProductId, setUpdateProductId] = useState({id: null});
   const { data, perPageLimit, currentPage, searchString, filters } =
     useSelector((state) => state.products);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const queryString = {
       offset: currentPage === 1 ? 0 : (currentPage - 1) * perPageLimit,
@@ -52,7 +52,7 @@ function Products() {
       },
       () => toast.error("Products could not be loaded. Please try again later.")
     );
-  }, [currentPage, perPageLimit, searchString, filters, reload]);
+  }, [currentPage, perPageLimit, searchString, filters, reload, updateProductId]);
 
   function handleDeleteProduct(id) {
     toast.info("Product is deleting...");
@@ -94,7 +94,7 @@ function Products() {
       <Table thead={["#", "Image", "Title", "Price", "Category", "Actions"]}>
         <AnimatePresence>
           {data.map((product) => (
-            <Table.Row key={product.id}>
+            <Table.Row key={product.id} updated={product.id === updateProductId.id} setUpdateProductId={setUpdateProductId}>
               <Table.Cell>{product.id}</Table.Cell>
               <Table.Cell>
                 <div className="w-[60px] h-[60px] relative overflow-hidden rounded-md border-2 border-gray-700 bg-white">
@@ -117,7 +117,7 @@ function Products() {
                   <EditButton
                     onClick={() =>
                       dispatch(
-                        openModal(<ProductUpdateForm productId={product.id} />)
+                        openModal(<ProductUpdateForm productId={product.id} setUpdateProductId={setUpdateProductId} />)
                       )
                     }
                   >
