@@ -33,7 +33,7 @@ export const CreateProductSchema = Yup.object().shape({
   title: Yup.string().min(3, "Too Short!").required("Required"),
   description: Yup.string().min(3, "Too Short!").required("Required"),
   price: Yup.number()
-    .min(0, "Price cannot be less than 0")
+    .min(1, "Price cannot be less than 1")
     .required("Required"),
   images: Yup.string().url("Enter valid photo url.").required("Required"),
   categoryId: Yup.string().required("Required"),
@@ -43,7 +43,7 @@ export const UpdateProductSchema = Yup.object().shape({
   title: Yup.string().min(3, "Too Short!").required("Required"),
   description: Yup.string().min(3, "Too Short!").required("Required"),
   price: Yup.number()
-    .min(0, "Price cannot be less than 0")
+    .min(1, "Price cannot be less than 1")
     .required("Required"),
   images: Yup.string().url("Enter valid photo url.").required("Required"),
 });
