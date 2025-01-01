@@ -16,7 +16,7 @@ Tech: React.JS, TailwindCSS, Redux Toolkit, Yup (Validation), Sonner (Tooltip Pa
 #### Dizine gidin
 
 ```bash 
-  cd verdexport-case
+  cd react-crud-example
 ```
 
 #### Bağımlılıkları yükleyin
